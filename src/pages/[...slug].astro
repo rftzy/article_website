@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+import { getCollection } from "astro:content";
+export const getStaticPaths = (async () => {
+    const articles = await getCollection("articles")
+
+    return articles.map(article => ({
+        params: { slug: article.slug }, props: { article }
+    }))
+})
+
+const { article } = Astro.props
+const { Content } = await article.render()
+---
+
+<Layout title={article.data.title + " - Astrocs"} description={article.data.description}>
+    <nav class="max-w-screen-sm w-full">
+        <a href="/">Back</a>
+    </nav>
+    <header class="max-w-screen-sm w-full">
+        <h1 class="font-black text-4xl uppercase">{article.data.title}</h1>
+        <p>{article.data.description}</p>
+    </header>
+    <main class="grid gap-6 max-w-screen-sm w-full">
+        <Content />
+        <style is:global>
+            main pre { @apply !bg-neutral-950 p-6 text-xl rounded-xl }
+            main p code { @apply bg-neutral-950 px-4 py-1 rounded-xl }
+            main ul { @apply list-['>'] pl-4 }
+            main ol { @apply list-decimal pl-4 }
+            main li { @apply pl-4 divide-y-2 }
+            * { scrollbar-color: rgb(38 38 38) transparent; scrollbar-width: 1rem; }
+            ::-webkit-scrollbar { @apply w-4 }
+            ::-webkit-scrollbar-thumb { @apply bg-neutral-800 }
+            ::-webkit-scrollbar-track { @apply bg-transparent }
+        </style>
+    </main>
+    <footer class="max-w-screen-sm w-full">
+        <p>&copy; 2023 Astrocs.<br>All rights reserved.</p>
+    </footer>
+</Layout>

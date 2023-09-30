@@ -1,0 +1,20 @@
+---
+
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{Astro.props.title}</title>
+        <meta name="description" content={Astro.props.description}>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans&display=swap" rel="stylesheet">
+	</head>
+	<body class="antialiased bg-neutral-900 flex flex-col font-['Josefin_Sans'] gap-12 items-center p-12 text-neutral-50 text-xl tracking-widest">
+		<slot />
+	</body>
+</html>
